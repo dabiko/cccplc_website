@@ -1,0 +1,288 @@
+
+function Enregistrer_demande_rappel(traitement, loader){
+	
+	
+	var nom=trim($("#nom").val());
+	var prenom=trim($("#prenom").val());
+	var telephone=trim($("#telephone").val());
+	var email=trim($("#email").val());
+	var objet=trim($("#objet").val());
+	var produit=trim($("#produit").val());
+	var error=false;
+
+	if(nom=="" || prenom=="" || telephone==" " || email=="" || objet==""){
+		 Afficher_loader('loader');
+		var message="Veuillez renseigner tous les champs.";
+		AfficherNotification("INFORMATION",'loader',message,"OK","","","",'1');	
+		error=true;
+	}else if(!validateEmail(email) ){
+		var message="L'adresse email saisie n'est pas correcte";
+		AfficherNotification("INFORMATION",'loader',message,"OK","","","",'1');
+	}
+	
+	if(error==false){
+			var destination_traitement=base64_decode(traitement); 
+			var data_to_send=$("#form-rappel").serialize();
+			//alert(data_to_send);
+			Afficher_loader('loader'); 
+			$.ajax({
+			   url : destination_traitement,
+			   type : 'POST', // Le type de la requête HTTP, ici devenu POST
+			   data : data_to_send, 
+			   success : function(data, statut){ // success est toujours en place, bien sûr !
+			// alert(data);
+				    Afficher_loader('loader');
+				   var message="Votre message a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s.";
+				   AfficherNotification("INFORMATION",'loader',message,"OK","","","",'1');
+			   },
+
+			   error : function(resultat, statut, erreur){
+					 alert(erreur);
+			   }
+			});
+			
+		}
+	
+}
+
+
+
+//************************************************** GESTION ESPACE PARTICIPANT*********************************************************/
+
+function Verif_saisie(event, element, btn){
+			var charCode = (event.which) ? event.which : event.keyCode
+			if ( charCode == 13 ) {
+				$("#"+btn).click();
+			}else{
+				var error=false; 
+				var conteneur_erreur=$("#"+element).attr("data-error-contener");
+				if($("#"+element).val().length==0)error=true;
+
+				if(element=="email" && 	!validateEmail($("#"+element).val()) ){
+					error=true;
+							if ($("#"+element).val().match(/[^a-zA-Z0-9.@ ]/g)) {
+								$("#"+element).val($("#"+element).val().replace(/[^a-zA-Z0-9.@ ]/g, ''));
+								if(!validateEmail($("#"+element).val()))error=true;
+								else error=false;
+							}
+				}
+				
+				if(element=="pwd" && 	$("#"+element).val().length<8){
+					error=true;
+				}
+				
+				if(error==true)$("#"+conteneur_erreur).fadeIn("slow");
+
+				else if($("#"+conteneur_erreur).is(':visible')) {
+					$("#"+conteneur_erreur).fadeOut("slow");
+				}
+			}
+}
+
+function verifierCaracteres(event,element) {
+	 	
+	var key = window.event ? event.keyCode : event.which; alert(event.keyCode);
+    if (event.keyCode === 8 || event.keyCode === 46) {
+        return true;
+    } else if ( key < 48 || key > 57 ) {
+        return false;
+    } else {
+        return true;
+    }
+			
+}
+
+
+function Enregistrement_reclamation(traitement, loader){
+	
+	var error=false;
+    if($("input[name='customer']:checked").length==0){
+			$("#div-erreur-champ-customer").fadeIn("slow");
+			error=true; 
+	}
+	
+	$( "#claim input, #claim email, #claim textarea  " ).each(function() {
+		if(trim($(this).val())==""){
+			var conteneur_erreur=$(this).attr("data-error-contener");
+			$("#"+conteneur_erreur).fadeIn("slow");
+			error=true;
+		}
+	});
+	if(!validateEmail($("#email").val()) ){
+		$("#div-erreur-champ-adresse-mail").fadeIn("slow");
+		error=true;
+	}
+	
+	if(error==false){
+		var destination_traitement=base64_decode(traitement); 
+		var data_to_send=$("#claim").serialize();
+        Afficher_loader(loader);
+		$.ajax({
+			url : destination_traitement,
+		   type : 'POST', // Le type de la requête HTTP, ici devenu POST
+		   data : data_to_send, 
+		   success : function(data, statut){ // success est toujours en place, bien sûr !
+			   //alert(data);
+			   Cacher_loader(loader);
+			   var reponse = eval('(' + data + ')'); 
+			   if(reponse.erreur=="oui"){
+				   AfficherNotification("INFORMATION",'loader',reponse.message,"OK","","","",'1');	
+			   } else{	
+					var message="<strong>"+$("#prenom").val()+"</strong>Your claim has been successfully registered.<br> After verification, we will contact you for follow up.<br>Thanks for trusting us.";
+					AfficherNotification("INFORMATION",'loader',message,"OK","","","",'0');	
+			   }
+			},
+
+			error : function(resultat, statut, erreur){
+				alert(erreur);
+			}
+		});
+		
+	}
+}
+
+
+
+function Enregistrement_rdv(traitement, loader){
+	
+	var error=false;
+    if($("input[name='customer']:checked").length==0){
+			$("#div-erreur-champ-customer").fadeIn("slow");
+			error=true; 
+	}
+	
+	$( "#appointment input, #appointment email, #appointment textarea  " ).each(function() {
+		if(trim($(this).val())==""){
+			var conteneur_erreur=$(this).attr("data-error-contener");
+			$("#"+conteneur_erreur).fadeIn("slow");
+			error=true;
+		}
+	});
+	if(!validateEmail($("#email").val()) ){
+		$("#div-erreur-champ-adresse-mail").fadeIn("slow");
+		error=true;
+	}
+	if(error==false){
+		var destination_traitement=base64_decode(traitement); 
+		var data_to_send=$("#appointment").serialize();
+        Afficher_loader(loader);
+		$.ajax({
+			url : destination_traitement,
+		   type : 'POST', // Le type de la requête HTTP, ici devenu POST
+		   data : data_to_send, 
+		   success : function(data, statut){ // success est toujours en place, bien sûr !
+			   //alert(data);
+			   Cacher_loader(loader);
+			   var reponse = eval('(' + data + ')'); 
+			   if(reponse.erreur=="oui"){
+				   AfficherNotification("INFORMATION",'loader',reponse.message,"OK","","","",'1');	
+			   } else{	
+					var message="<strong>"+$("#prenom").val()+"</strong>Your appointment request has been successfully registered.<br> One of our Customer Relationship  Officer will contact you.";
+					AfficherNotification("INFORMATION",'loader',message,"OK","","","",'0');	
+			   }
+			},
+
+			error : function(resultat, statut, erreur){
+				alert(erreur);
+			}
+		});
+		
+	}
+}
+
+
+
+function Enregistrement_suggestion(traitement, loader){
+	
+	var error=false;
+	$( "#suggestion input, #suggestion email, #suggestion textarea  " ).each(function() {
+		
+		if(trim($(this).val())==""){
+			var conteneur_erreur=$(this).attr("data-error-contener");
+			$("#"+conteneur_erreur).fadeIn("slow");
+			error=true;
+		}
+	});
+    if($("input[name='customer']:checked").length==0){
+			$("#div-erreur-champ-customer").fadeIn("slow");
+			error=true; 
+	}
+	
+	if(!validateEmail($("#email").val()) ){
+		$("#div-erreur-champ-adresse-mail").fadeIn("slow");
+		error=true;
+	}
+	if(error==false){
+		var destination_traitement=base64_decode(traitement); 
+		var data_to_send=$("#suggestion").serialize();
+        Afficher_loader(loader);
+		$.ajax({
+			url : destination_traitement,
+		   type : 'POST', // Le type de la requête HTTP, ici devenu POST
+		   data : data_to_send, 
+		   success : function(data, statut){ // success est toujours en place, bien sûr !
+			   //alert(data);
+			   Cacher_loader(loader);
+			   var reponse = eval('(' + data + ')'); 
+			   if(reponse.erreur=="oui"){
+				   AfficherNotification("INFORMATION",'loader',reponse.message,"OK","","","",'1');	
+			   } else{	
+					var message="<strong>"+$("#prenom").val()+"</strong>Your suggestion has been successfully registered.<br> We shall not spare any effort to address your concerns.";
+					AfficherNotification("INFORMATION",'loader',message,"OK","","","",'0');	
+			   }
+			},
+
+			error : function(resultat, statut, erreur){
+				alert(erreur);
+			}
+		});
+		
+	}
+}
+
+
+
+function Nous_contacter(traitement, loader){
+	
+	var error=false;
+	
+	$( "#contact-form input, #contact-form email, #contact-form textarea  " ).each(function() {
+		if(trim($(this).val())==""){
+			var conteneur_erreur=$(this).attr("data-error-contener");
+			$("#"+conteneur_erreur).fadeIn("slow");
+			error=true;
+		}
+	});
+	if(!validateEmail($("#email").val()) ){
+		$("#div-erreur-champ-email").fadeIn("slow");
+		error=true;
+	}
+	
+	if(error==false){
+		var destination_traitement=base64_decode(traitement); 
+		var data_to_send=$("#contact-form").serialize();
+        Afficher_loader(loader);
+		$.ajax({
+			url : destination_traitement,
+		   type : 'POST', // Le type de la requête HTTP, ici devenu POST
+		   data : data_to_send, 
+		   success : function(data, statut){ // success est toujours en place, bien sûr !
+			   var reponse = eval('(' + data + ')'); 
+			   if(reponse.erreur=="oui"){
+				   AfficherNotification("INFORMATION",'loader',reponse.message,"OK","","","",'1');	
+			   }else{	
+					var message="<strong>"+$("#prenom").val()+"</strong>Your message has been successfully registered.<br> We will contact you for follow up.<br>Thanks for trusting us.";
+					AfficherNotification("INFORMATION",'loader',message,"OK","","","",'0');
+					document.getElementById("contact-form").reset();
+					if($(".message-erreur").is(":visible"))$(".message-erreur").fadeOut("slow");
+			   }
+			},
+
+			error : function(resultat, statut, erreur){
+				alert(erreur);
+			}
+		});
+		
+	}
+}
+

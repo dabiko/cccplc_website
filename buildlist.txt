@@ -1,0 +1,46 @@
+<option>Bank Teller</option>
+<option>Customer Service Representative</option>
+<option>Branch Manager</option>
+<option>Personal Banker</option>
+<option>Loan Officer</option>
+<option>Financial Advisor</option>
+<option>Investment Analyst</option>
+<option>Credit Analyst</option>
+<option>Underwriter</option>
+<option>Mortgage Specialist</option>
+<option>Relationship Manager</option>
+<option>Wealth Manager</option>
+<option>Operations Manager</option>
+<option>Risk Analyst</option>
+<option>Compliance Officer</option>
+<option>Treasury Analyst</option>
+<option>Financial Controller</option>
+<option>Business Development Officer</option>
+<option>Portfolio Manager</option>
+<option>Fraud Investigator</option>
+<option>Network Engineer</option>
+<option>Systems Administrator</option>
+<option>Database Administrator (DBA)</option>
+<option>Software Developer/Engineer</option>
+<option>Cybersecurity Specialist</option>
+<option>Business Analyst (IT)</option>
+<option>IT Project Manager</option>
+<option>Data Analyst/Scientist</option>
+<option>IT Auditor</option>
+<option>Cloud Engineer/Architect</option>
+<option>Fintech Specialist</option>
+
+
+
+CREATE TABLE `hr` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(100) NOT NULL,
+`email` varchar(100) NOT NULL,
+`country` varchar(100) NOT NULL,
+`cv` varchar(100) NOT NULL,
+`job` varchar(100) NOT NULL,
+`salary` varchar(100) NOT NULL,
+`cv` varchar(100) NOT NULL,
+`resume` varchar(100) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;

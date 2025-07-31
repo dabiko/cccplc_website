@@ -1,0 +1,241 @@
+@import url("responsive-index.css");
+@media only screen 
+
+and (min-device-width : 320px) 
+
+and (max-device-width : 480px) {
+
+/* Smartphones (portrait and landscape) ----------- */
+
+
+.superheader {
+    flex-direction: column-reverse;
+}
+
+
+.bloc_right_header {
+    display: none;
+}
+}
+
+@media only screen and (max-device-width:650px){
+ .bloc_right_header {
+    display: none;
+}
+
+.superheader {
+    justify-content: center;
+}
+}
+
+
+
+
+@media only screen 
+
+and (min-width : 321px) {
+
+/* Smartphones (landscape) ----------- */
+
+
+
+}
+
+
+
+
+
+@media only screen 
+
+and (max-width : 320px) {
+
+/* Smartphones (portrait) ----------- */
+.superheader {
+    flex-direction: column-reverse;
+}
+
+
+.bloc_right_header {
+    display: none;
+}
+
+
+
+
+}
+
+
+@media only screen and (max-width:1100px){
+    ul#menu_header {
+    position: fixed;
+    right: -100%;
+    flex-direction: column;
+    top: 68px;
+    /* display: none; */
+    height: auto;
+    z-index: 10000;
+    background: #0152a4;
+    left: 100%;
+}
+
+.header, .superheader {
+    padding: 7px 10px;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.btn-responsive {
+    display: block;
+    width: 30px;
+}
+
+.btn-responsive svg {
+    width: 100%;
+    height: auto;
+    fill: rgb(48, 76, 141) !important;
+}
+
+.search-content {
+    position: absolute;
+    right: 55px;
+    top: 13px;
+    bottom: 0;
+    height: 57%;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+}
+
+.logo {
+    width: 55px;
+}
+
+#menu_header > li {
+    border-bottom: 1px solid #d8d8d8;
+    margin-left: 0;
+    padding: 10px;
+    height: auto;
+}
+
+ul.sous-menu {
+    position: relative;
+    width: 100%;
+    left: -10px;
+    overflow: unset;
+}
+
+li.active-menu-header {
+    padding-bottom: 0 !important;
+}
+
+#menu_header  li:after {
+    position: absolute;
+    content: '\f0da';
+    right: 38px;
+    font-family: 'FontAwesome';
+    top: 15px;
+}
+
+li.elt-close {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+}
+
+li.elt-close svg {
+    width: 20px;
+    height: 20px;
+}
+}
+
+
+
+
+
+@media only screen 
+
+and (min-device-width : 768px) 
+
+and (max-device-width : 1024px) {
+
+/* iPads (portrait and landscape) ----------- */
+
+
+
+}
+
+
+
+
+
+@media only screen 
+
+and (min-device-width : 768px) 
+
+and (max-device-width : 1024px) 
+
+and (orientation : landscape) {
+
+/* iPads (landscape) ----------- */
+
+
+
+}
+
+
+
+
+
+@media only screen 
+
+and (min-device-width : 768px) 
+
+and (max-device-width : 1024px) 
+
+and (orientation : portrait) {
+
+/* iPads (portrait) ----------- */
+
+
+
+
+
+}
+
+
+
+@media only screen 
+
+and (min-width : 1200px) {
+
+/* Desktops and laptops ----------- */
+
+
+
+}
+
+
+
+@media only screen 
+
+and (min-width : 1700px) {
+
+/* Large screens ----------- */
+
+
+
+}
+
+
+
+@media
+
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+
+only screen and (min-device-pixel-ratio : 1.5) {
+
+/* iPhone 4 ----------- */
+
+
+
+}

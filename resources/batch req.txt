@@ -1,0 +1,56 @@
+//.......................>>>>>>>this code is created to handle multi request to the server and a returned code is called to process the response data
+
+function showData(data1, data2) {
+    alert(data1[0].max_id);
+    alert(data2[0].max_id);
+}
+
+function method1() {
+    return $.ajax("http://search.twitter.com/search.json", {
+        data: {
+            q: 'ashishnjain'
+        },
+        dataType: 'jsonp'
+    });
+}
+
+function method2() {
+    return $.ajax("http://search.twitter.com/search.json", {
+        data: {
+            q: 'ashishnjain'
+        },
+        dataType: 'jsonp'
+    });
+}
+
+$.when(method1(), method2()).then(showData);
+
+////..............................................................>>>>>>>extra code copied 
+var count = 0;
+function countResponse(data) {
+    count++;
+    if(count==2)
+    {
+        // Do something after getting responce from both ajax request
+    }
+};
+
+var method1 = function() {
+    return $.ajax('localhost/MyDataService/DataMethod_ReturnsData', {
+        dataType: "jsonp",
+        jsonp: "$callback",
+        success: function(data) {
+            countResponse(data)
+        }
+    });
+};
+
+var method2 = function() {
+    return $.ajax('localhost/MyDataService/DataMethod_ReturnsCount', {
+        dataType: "jsonp",
+        jsonp: "$callback",
+        success: function(data) {
+            countResponse(data)
+        }
+    });
+};
