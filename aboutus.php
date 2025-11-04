@@ -6,7 +6,7 @@ require_once 'header.php';
 <section id="page-title" class="page-title-parallax page-title-dark" style="background-image: url('images/extra/about.jpg'); padding: 120px 0;" data-bottom-top="background-position:-500px 30px;" data-top-bottom="background-position:0px -400px;">
 <div class="container clearfix">
 <h1>ABOUT US</h1>
-<span>Get more insight on CCC PLC</span>
+<span>Get more insight on CCC PLC.</span>
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="index">Home</a></li>
 <li class="breadcrumb-item active" aria-current="page">About Us</li>
@@ -25,7 +25,7 @@ require_once 'header.php';
 <h2 class="text-rotater" data-separator="|" data-rotate="bounceIn" data-speed="2500">
 OUR <span class="t-rotate color morphext"><span class="animated bounceIn">HISTORY</span></span>
 </h2>
- <span>CCC Plc is a global diversified company with a network of production and commercial branches nationwide.</span>
+ <span>CCC Plc is a global Page diversified company with a network of production and commercial branches nationwide.</span>
 
 </div>
    
